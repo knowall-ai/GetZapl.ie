@@ -16,6 +16,6 @@
   },
   "include": ["src/**/*.ts", "src/types/**/*.d.ts"], // Ensure this covers your `global.d.ts`
 
-  "exclude": ["node_modules","tabs", "functions"]
+  "exclude": ["node_modules","tabs", "functions", "**/*.test.ts", "**/*.spec.ts"]
 
 }
