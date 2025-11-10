@@ -116,13 +116,12 @@ const getWallets = async (
   );
 
   try {
-    //const accessToken = await getAccessToken(`${userName}`, `${password}`);
-    const response = await fetch(`${lnbiturl}/usermanager/api/v1/wallets`, {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
+    const response = await fetch(`${lnbiturl}/api/v1/wallets`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        //Authorization: `Bearer ${accessToken}`,
-        'X-Api-Key': adminKey,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -245,13 +244,14 @@ const getUsers = async (
     const encodedExtra = JSON.stringify(filterByExtra);
     //console.log('encodedExtra:', encodedExtra);
 
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
     const response = await fetch(
-      `${lnbiturl}/usermanager/api/v1/users?extra=${encodedExtra}`,
+      `${lnbiturl}/api/v1/users?extra=${encodedExtra}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -326,11 +326,12 @@ const createUser = async (
 
     console.log(JSON.stringify(requestBody));
 
-    const response = await fetch(`${lnbiturl}/usermanager/api/v1/users`, {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
+    const response = await fetch(`${lnbiturl}/api/v1/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Api-Key': adminKey,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(requestBody), // Stringify the request body
     });
@@ -384,13 +385,14 @@ const getUser = async (
   );
 
   try {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
     const response = await fetch(
-      `${lnbiturl}/usermanager/api/v1/users/${userId}`,
+      `${lnbiturl}/api/v1/users/${userId}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -450,15 +452,14 @@ const updateUser = async (
       extra: extra,
     };
 
-    //const accessToken = await getAccessToken(`${userName}`, `${password}`);
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
     const response = await fetch(
-      `${lnbiturl}/usermanager/api/v1/users/${userId}`,
+      `${lnbiturl}/api/v1/users/${userId}`,
       {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          //Authorization: `Bearer ${accessToken}`,
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(requestBody), // Stringify the request body
       },
@@ -519,13 +520,12 @@ const createWallet = async (
       wallet_name: walletName,
     };
 
-    //const accessToken = await getAccessToken(`${userName}`, `${password}`);
-    const response = await fetch(`${lnbiturl}/usermanager/api/v1/wallets`, {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
+    const response = await fetch(`${lnbiturl}/api/v1/wallets`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        //Authorization: `Bearer ${accessToken}`,
-        'X-Api-Key': adminKey,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(requestBody), // Stringify the request body
     });

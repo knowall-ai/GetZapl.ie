@@ -264,13 +264,14 @@ const getUsers = async (
     console.log('encodedExtra:', encodedExtra);
     console.log('encodedExtra:', encodedExtra);
 
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
     const response = await fetch(
-      `${nodeUrl}/usermanager/api/v1/users?extra=${encodedExtra}`,
+      `${nodeUrl}/api/v1/users?extra=${encodedExtra}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -334,13 +335,14 @@ const getUser = async (
   }
 
   try {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
     const response = await fetch(
-      `${nodeUrl}/usermanager/api/v1/users/${userId}`,
+      `${nodeUrl}/api/v1/users/${userId}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -603,11 +605,12 @@ const getInvoicePayment = async (lnKey: string, invoice: string) => {
 const getAllWallets = async (lnKey: string) => {
  
   try {
-    const response = await fetch(`${nodeUrl}/usermanager/api/v1/wallets/`, {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
+    const response = await fetch(`${nodeUrl}/api/v1/wallets/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'X-Api-Key': lnKey,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -926,13 +929,14 @@ const getUserWalletTransactions = async (
   );*/
 
   try {
+    const accessToken = await getAccessToken(`${userName}`, `${password}`);
     const response = await fetch(
-      `${nodeUrl}/usermanager/api/v1/transactions/${walletId}`,
+      `${nodeUrl}/api/v1/wallets/${walletId}/transactions`,
       {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          'X-Api-Key': apiKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
