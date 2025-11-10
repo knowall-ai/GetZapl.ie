@@ -36,18 +36,18 @@ function TitleUpdater() {
 
   useEffect(() => {
     const titles: { [key: string]: string } = {
-      "/feed": "Feed - Zapp.ie",
-      "/users": "Users - Zapp.ie",
-      "/rewards": "Rewards - Zapp.ie",
-      "/wallet": "Wallet - Zapp.ie",
-      "/login": "Login - Zapp.ie",
+      "/feed": "Feed - Zappl.ie",
+      "/users": "Users - Zappl.ie",
+      "/rewards": "Rewards - Zappl.ie",
+      "/wallet": "Wallet - Zappl.ie",
+      "/login": "Login - Zappl.ie",
       "/auth-start": "Authenticating...",
       "/auth-end": "Authentication Complete",
-      "/settings": "Settings - Zapp.ie",
+      "/settings": "Settings - Zappl.ie",
 
     };
 
-    document.title = titles[location.pathname] || "Zapp.ie"; 
+    document.title = titles[location.pathname] || "Zappl.ie"; 
   }, [location]);
 
   return null;

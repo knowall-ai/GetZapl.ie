@@ -16,12 +16,12 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "Zapp.ie (${{APP_NAME_SUFFIX}})",
-        "full": "Zapp.ie the zapster"
+        "short": "Zappl.ie (${{APP_NAME_SUFFIX}})",
+        "full": "Zappl.ie the zapster"
     },
     "description": {
-        "short": "Zapp.ie: Integrate Bitcoin rewards and AI for enhanced collaboration in Teams",
-        "full": "Zapp.ie seamlessly integrates into Microsoft Teams, bringing a unique blend of Bitcoin micro-transactions and AI automation to enhance team collaboration and recognition. With Zapp.ie, you can effortlessly send Bitcoin-based rewards (Sats) to colleagues as a token of appreciation, automate recognition for positive behavior, and foster a more engaged and motivated workplace. Transform how your team acknowledges great work and builds a culture of gratitude directly within Teams."
+        "short": "Zappl.ie: Integrate Bitcoin rewards and AI for enhanced collaboration in Teams",
+        "full": "Zappl.ie seamlessly integrates into Microsoft Teams, bringing a unique blend of Bitcoin micro-transactions and AI automation to enhance team collaboration and recognition. With Zappl.ie, you can effortlessly send Bitcoin-based rewards (Sats) to colleagues as a token of appreciation, automate recognition for positive behavior, and foster a more engaged and motivated workplace. Transform how your team acknowledges great work and builds a culture of gratitude directly within Teams."
     },
     "accentColor": "#002A5B",
     "bots": [
@@ -77,8 +77,8 @@
                 "channelTab"
             ], 
             "name": "Feed", 
-            "contentUrl": "https://zappie-dev-development.azurewebsites.net", 
-            "websiteUrl": "https://zappie-dev-development.azurewebsites.net"
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net", 
+            "websiteUrl": "https://zappl-ie-dev-development.azurewebsites.net"
         }, 
         { 
             "entityId": "usersTab", 
@@ -91,7 +91,7 @@
                 "channelTab"
             ], 
             "name": "Users", 
-            "contentUrl": "https://zappie-dev-development.azurewebsites.net/users", 
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/users", 
             "websiteUrl": "https://zappie-dev-development.azurewebsites.net/users"
         } ,       { 
             "entityId": "rewardsTab", 
@@ -104,7 +104,7 @@
                 "channelTab"
             ], 
             "name": "Rewards", 
-            "contentUrl": "https://zappie-dev-development.azurewebsites.net/rewards", 
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/rewards", 
             "websiteUrl": "https://zappie-dev-development.azurewebsites.net/rewards"
         },
                { 
@@ -118,7 +118,7 @@
                 "channelTab"
             ], 
             "name": "Wallet", 
-            "contentUrl": "https://zappie-dev-development.azurewebsites.net/wallet", 
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/wallet", 
             "websiteUrl": "https://zappie-dev-development.azurewebsites.net/wallet"
         },
         { 
@@ -132,7 +132,7 @@
                 "channelTab"
             ], 
             "name": "Settings", 
-            "contentUrl": "https://zappie-dev-development.azurewebsites.net/settings", 
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/settings", 
             "websiteUrl": "https://zappie-dev-development.azurewebsites.net/settings"
         }
     ],
