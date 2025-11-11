@@ -10,6 +10,7 @@ import { IRawStyle } from '@fluentui/react';
 import SignInSignOutButton from './components/SignInSignOutButton';
 import { useNavigate } from 'react-router-dom';
 import './styles/Home.css';
+import KnowAllLogo from './images/KnowAllAI_Logo_White.png';
 
 const centeredImageStyle: IRawStyle = {
   display: 'block',
@@ -21,6 +22,7 @@ const centeredImageStyle: IRawStyle = {
   flexShrink: 0,
   margin: 'auto',
   paddingBottom: '80px',
+  filter: 'brightness(0) invert(1)',
 };
 
 export function Login() {
@@ -40,10 +42,10 @@ export function Login() {
       <div className="overlay"></div>
       <div className="content">
         <Image
-          src="knowall.png"
+          src={KnowAllLogo}
           styles={{ root: centeredImageStyle }}
           alt="KnowAll AI"
-          width="5%"
+          width="10%"
         />
         <AuthenticatedTemplate>
           <Text

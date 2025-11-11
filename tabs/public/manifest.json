@@ -19,9 +19,6 @@
     }
   ],
   "start_url": ".",
-  "author": "KnowAll AI",
-  "author_url": "https://www.knowall.ai",
-  "support_email": "hello@knowall.ai",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
