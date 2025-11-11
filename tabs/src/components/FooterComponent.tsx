@@ -20,6 +20,9 @@ const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
       <Link to="/wallet">Wallet</Link>&nbsp;|&nbsp;      
       <Link to="/settings">Settings</Link>&nbsp;|&nbsp;      
       <SignInSignOutButton />
+      <div className={styles.attribution}>
+        Built by KnowAll AI | Contact: <a href="mailto:hello@knowall.ai">hello@knowall.ai</a> | <a href="https://www.knowall.ai" target="_blank" rel="noopener noreferrer">www.knowall.ai</a>
+      </div>
     </footer>
     
   );

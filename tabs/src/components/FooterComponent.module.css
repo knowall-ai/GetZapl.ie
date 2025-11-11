@@ -18,3 +18,17 @@
 .footer a:hover {
   text-decoration: underline; /* Optional: Add underline on hover for better UX */
 }
+
+.attribution {
+  margin-top: 5px;
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.attribution a {
+  color: #F2A900;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+}

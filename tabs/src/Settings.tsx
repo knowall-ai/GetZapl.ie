@@ -9,7 +9,7 @@ const Settings: React.FC = () => {
   return ( 
 <div className={styles.mainContainer}>
   <div className={styles.title}>
-    Settings <img src={ProvidedBy} alt="Provided By" className={styles.providedByImage} />
+    Settings <span className={styles.providedBy}>Built by KnowAll AI</span>
   </div>
   <div style={{ width: '100%' }}> <CurrencySetting /> </div>
 </div>

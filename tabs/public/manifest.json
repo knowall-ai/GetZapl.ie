@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Zapp.ie",
+  "name": "Zapp.ie by KnowAll AI",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,6 +19,9 @@
     }
   ],
   "start_url": ".",
+  "author": "KnowAll AI",
+  "author_url": "https://www.knowall.ai",
+  "support_email": "hello@knowall.ai",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
