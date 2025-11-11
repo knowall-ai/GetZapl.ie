@@ -90,9 +90,9 @@
                 "personalTab",
                 "channelTab"
             ], 
-            "name": "Users", 
-            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/users", 
-            "websiteUrl": "https://zappie-dev-development.azurewebsites.net/users"
+            "name": "Users",
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/users",
+            "websiteUrl": "https://zappl-ie-dev-development.azurewebsites.net/users"
         } ,       { 
             "entityId": "rewardsTab", 
             "scopes": [       
@@ -103,9 +103,9 @@
                 "personalTab",
                 "channelTab"
             ], 
-            "name": "Rewards", 
-            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/rewards", 
-            "websiteUrl": "https://zappie-dev-development.azurewebsites.net/rewards"
+            "name": "Rewards",
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/rewards",
+            "websiteUrl": "https://zappl-ie-dev-development.azurewebsites.net/rewards"
         },
                { 
             "entityId": "walletTab", 
@@ -117,9 +117,9 @@
                 "personalTab",
                 "channelTab"
             ], 
-            "name": "Wallet", 
-            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/wallet", 
-            "websiteUrl": "https://zappie-dev-development.azurewebsites.net/wallet"
+            "name": "Wallet",
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/wallet",
+            "websiteUrl": "https://zappl-ie-dev-development.azurewebsites.net/wallet"
         },
         { 
             "entityId": "settingsTab", 
@@ -131,9 +131,9 @@
                 "personalTab",
                 "channelTab"
             ], 
-            "name": "Settings", 
-            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/settings", 
-            "websiteUrl": "https://zappie-dev-development.azurewebsites.net/settings"
+            "name": "Settings",
+            "contentUrl": "https://zappl-ie-dev-development.azurewebsites.net/settings",
+            "websiteUrl": "https://zappl-ie-dev-development.azurewebsites.net/settings"
         }
     ],
     "permissions": [
