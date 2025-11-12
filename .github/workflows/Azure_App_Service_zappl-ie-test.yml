@@ -67,8 +67,8 @@ jobs:
               else
                 SLOT_NAME="testing"
               fi
-          RESOURCE_GROUP="rg-Zappl-ie-dev"
-          APP_NAME="zappl-ie-dev"
+          RESOURCE_GROUP="rg-Zapl-ie-dev"
+          APP_NAME="zapl-ie-dev"
           echo "Using slot: $SLOT_NAME"
     
           # Check if the slot exists
@@ -87,7 +87,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'zappl-ie-dev'
+          app-name: 'zapl-ie-dev'
           slot-name: ${{ github.event.pull_request.number && format('pr-{0}', github.event.pull_request.number) || 'testing' }}
           package: .
 

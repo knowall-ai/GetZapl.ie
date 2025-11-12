@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -type f ( -name \"*.json\" -o -name \"*.yml\" -o -name \"*.yaml\" -o -name \"*.md\" -o -name \"*.ts\" -o -name \"*.tsx\" ) ! -path \"*/node_modules/*\" ! -path \"*/.git/*\" ! -path \"*/package-lock.json\" -exec sed -i 's/Zappl\\.ie/Zaplie/g; s/Zapl-ie/Zapl-ie/g; s/zapl-ie/zapl-ie/g' {} ;)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
