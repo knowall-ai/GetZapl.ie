@@ -18,19 +18,21 @@
   margin-bottom: 8px;
 }
 
-.navigation a:not(:last-child)::after {
+.navigation > a::after {
   content: '|';
   margin: 0 8px;
   color: rgba(255, 255, 255, 0.5);
 }
+.navigation > a:last-of-type::after {
+  display: none;
+}
 
-.footer a {
+.navigation a {
   color: white;
   text-decoration: none;
   transition: all 0.3s ease;
 }
-
-.footer a:hover {
+.navigation a:hover {
   color: #F2A900;
 }
 

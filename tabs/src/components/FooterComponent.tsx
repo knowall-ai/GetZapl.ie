@@ -25,11 +25,15 @@ const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
       </div>
       <div className={styles.attribution}>
         <span className={styles.poweredBy}>Powered by</span>
-        <a href={KNOWALL_CONSTANTS.website} target="_blank" rel="noopener noreferrer" className={styles.knowallLink}>
+         <a
+          href={KNOWALL_CONSTANTS.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.knowallLink}
+          aria-label="Visit KnowAll AI website"
+        >
           <span className={styles.knowallBadge}>{KNOWALL_CONSTANTS.name}</span>
         </a>
-        <span className={styles.separator}>•</span>
-        <a href={`mailto:${KNOWALL_CONSTANTS.email}`} className={styles.contactLink}>{KNOWALL_CONSTANTS.email}</a>
       </div>
     </footer>
 
