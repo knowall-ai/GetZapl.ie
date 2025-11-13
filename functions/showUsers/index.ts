@@ -49,14 +49,17 @@ const getUsers = async (
     console.log(`getUsers starting ... (adminKey: ${adminKey})`);
 
     console.log(`LNBits URL: ${lnbiturl}`);
-    try {  
+    try {
+        // Use Core Users API - get wallets as proxy for users
+        const { username, password } = getCredentials(req);
+        const accessToken = await getAccessToken(req, username, password);
         const response = await fetch(
-            `${lnbiturl}/usermanager/api/v1/users`,
+            `${lnbiturl}/api/v1/wallets`,
             {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': adminKey,
+                    Authorization: `Bearer ${accessToken}`,
                 },
             },
         );

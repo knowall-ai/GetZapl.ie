@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "usermanager",
+			"name": "users (Core API)",
 			"item": [
 				{
 					"name": "Get Payments (Mario)",
@@ -20,49 +20,53 @@
 				{
 					"name": "Get Users (filterByExtra)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"wallets"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create User",
+					"name": "Create User (Wallet)",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "X-Api-Key",
-								"value": "1d5658a73ecf426d9039b6c5f30a3de5",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"user_name\":\"Joe Blogs\",\"email\":\"someone@somewhere.com\", \"wallet_name\": \"Allowance\",\"password\":\"password1\",\"extra\":{\"aadObjectId\":\"c079ba81-0814-4100-86a5-8395affe98d9\",\"profileImg\":\"https://hiberniaevros.sharepoint.com/_layouts/15/userphoto.aspx?AccountName=undefined\",\"privateWalletId\":\"tbc\",\"allowanceWalletId\":\"tbc\",\"userType\":\"teammate\"}}",
+							"raw": "{\"name\": \"Joe Blogs Allowance\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,18 +74,17 @@
 							}
 						},
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
 								"api",
 								"v1",
-								"users"
+								"wallets"
 							]
 						}
 					},
@@ -90,27 +93,30 @@
 				{
 					"name": "Get Users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"wallets"
 							]
 						}
 					},
@@ -119,58 +125,65 @@
 				{
 					"name": "Get User (Mario)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"wallets"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update User (Mario)",
+					"name": "Get User Wallets (Mario)",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
 						},
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"user_name\": \"mario.desousa@eirevo.ie1\",\r\n  \"extra\": {\r\n    \"aadObjectId\": \"ff7d54cb-e3ca-4a62-9011-887bbf15f7df\",\r\n    \"profileImg\": \"https://hiberniaevros.sharepoint.com/_layouts/15/userphoto.aspx?AccountName=mario.desousa@eirevo.ie\",\r\n    \"sendingWalletId\": \"b397a4ef19f641458f7895db9024fc14\",\r\n    \"receivingWalletId\": \"9c59e2e1effc4f4dbb0b571a5b680885\",\r\n    \"userType\": \"teammate\"\r\n  }\r\n}"
-						},
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users/2984e3ac627e4fea9fd6dde9c4df83b5",
+							"raw": "https://bank.knowall.ai/users/api/v1/user/2984e3ac627e4fea9fd6dde9c4df83b5/wallet",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
+								"users",
 								"api",
 								"v1",
-								"users",
-								"2984e3ac627e4fea9fd6dde9c4df83b5"
+								"user",
+								"2984e3ac627e4fea9fd6dde9c4df83b5",
+								"wallet"
 							],
 							"query": [
 								{
@@ -184,42 +197,35 @@
 					"response": []
 				},
 				{
-					"name": "Update User (Ben)",
+					"name": "Get User Wallets (Ben)",
 					"request": {
 						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "X-Api-Key",
-								"value": "1d5658a73ecf426d9039b6c5f30a3de5",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"user_name\": \"benweeks\",\r\n  \"extra\": {\r\n    \"profileImg\": \"https://hiberniaevros.sharepoint.com/_layouts/15/userphoto.aspx?AccountName=ben.weeks@eirevo.ie\",\r\n    \"userType\": \"teammate\"\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
 								}
-							}
+							]
 						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users/56b310d0539841c29f2c190fc4a341d0",
+							"raw": "https://bank.knowall.ai/users/api/v1/user/56b310d0539841c29f2c190fc4a341d0/wallet",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
+								"users",
 								"api",
 								"v1",
-								"users",
-								"56b310d0539841c29f2c190fc4a341d0"
+								"user",
+								"56b310d0539841c29f2c190fc4a341d0",
+								"wallet"
 							],
 							"query": [
 								{
@@ -233,29 +239,32 @@
 					"response": []
 				},
 				{
-					"name": "Get Wallets (User Manager)",
+					"name": "Get Wallets",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"wallets"
 							]
 						}
 					},
@@ -264,27 +273,30 @@
 				{
 					"name": "Get Users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"wallets"
 							]
 						}
 					},
@@ -318,7 +330,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"MarioDS\",\r\n  \"password\": \"978sa*/eV0wt\"\r\n}",
+							"raw": "{\r\n  \"username\": \"knowallai-dev\",\r\n  \"password\": \"7SKIkD7m7BmeeQD0fZ\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -326,12 +338,12 @@
 							}
 						},
 						"url": {
-							"raw": "https://demo.lnbits.com/api/v1/auth",
+							"raw": "https://bank.knowall.ai/api/v1/auth",
 							"protocol": "https",
 							"host": [
-								"demo",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
 								"api",
@@ -422,7 +434,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/api/v1/wallets",
+							"raw": "https://bank.knowall.ai/api/v1/wallets",
 							"protocol": "https",
 							"host": [
 								"finickyoil0",
@@ -446,27 +458,33 @@
 				{
 					"name": "Get User Wallets (Mario)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/users/api/v1/user/{{mario_user_id}}/wallet",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
+								"users",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"user",
+								"{{mario_user_id}}",
+								"wallet"
 							]
 						}
 					},
@@ -475,27 +493,33 @@
 				{
 					"name": "Get User Wallets (Ben)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://finickyoil0.lnbits.com/usermanager/api/v1/users?X-Api-Key=1d5658a73ecf426d9039b6c5f30a3de5",
+							"raw": "https://bank.knowall.ai/users/api/v1/user/{{ben_user_id}}/wallet",
 							"protocol": "https",
 							"host": [
-								"finickyoil0",
-								"lnbits",
-								"com"
+								"bank",
+								"knowall",
+								"ai"
 							],
 							"path": [
-								"usermanager",
+								"users",
 								"api",
 								"v1",
-								"users"
-							],
-							"query": [
-								{
-									"key": "X-Api-Key",
-									"value": "1d5658a73ecf426d9039b6c5f30a3de5"
-								}
+								"user",
+								"{{ben_user_id}}",
+								"wallet"
 							]
 						}
 					},

@@ -42,7 +42,7 @@ export function Login() {
         <Image
           src="eirevo.png"
           styles={{ root: centeredImageStyle }}
-          alt="Eirevo"
+          alt="KnowAll AI"
           width="5%"
         />
         <AuthenticatedTemplate>

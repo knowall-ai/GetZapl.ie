@@ -81,7 +81,7 @@ export class UserService {
         {
           aadObjectId: aadObjectId,
           userType: 'teammate',
-          profileImg: `https://hiberniaevros.sharepoint.com/_layouts/15/userphoto.aspx?AccountName='${teamsChannelAccount.userPrincipalName}`, // TODO: Get the user's profile image from Teams
+          profileImg: `https://knowallai.sharepoint.com/_layouts/15/userphoto.aspx?AccountName='${teamsChannelAccount.userPrincipalName}`, // TODO: Get the user's profile image from Teams
           //profileImg: teamsChannelAccount.properties
         }, // We'll check and update this when when they have both wallets anyway.
       );

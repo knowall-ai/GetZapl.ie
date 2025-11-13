@@ -3,12 +3,12 @@
 const getCurrentUser = async (): Promise<User | null> => {
   // TODO: Implement this Akash
   const user: User = {
-    id: '8932744254ee408a8a2d198e69a5a714',
-    displayName: 'Akash Jadhav (EvrosDemo)',
+    id: '3a6c78a3-5b9b-420a-8d1b-d44d01ff781b',
+    displayName: 'Akash Jadhav',
     profileImg:
-      'https://hiberniaevros.sharepoint.com/_layouts/15/userphoto.aspx?AccountName=akash.jadhav@evrosdemo.onmicrosoft.com',
-    aadObjectId: '4f882e7e-f30e-4fe2-8514-6d583f1efe5b',
-    email: 'akash.jadhav@evrosdemo.onmicrosoft.com',
+      'https://knowallai.sharepoint.com/_layouts/15/userphoto.aspx?AccountName=akash.jadhav@knowall.ai	',
+    aadObjectId: '3a6c78a3-5b9b-420a-8d1b-d44d01ff781b',
+    email: 'akash.jadhav@knowall.ai	',
     privateWallet: null, // You get the idea
     allowanceWallet: null,
     type: 'Teammate',

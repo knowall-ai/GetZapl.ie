@@ -51,6 +51,7 @@ export async function getAccessToken(
   // Store the promise of the request
   accessTokenPromise = (async (): Promise<string> => {
     try {
+      console.log(`Requesting access token from akash 2`);
       const response = await fetch(`${lnbiturl}/api/v1/auth`, {
         method: 'POST',
         headers: {

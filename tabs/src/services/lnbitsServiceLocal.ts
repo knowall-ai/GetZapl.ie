@@ -6,6 +6,7 @@
 const userName = process.env.REACT_APP_LNBITS_USERNAME;
 const password = process.env.REACT_APP_LNBITS_PASSWORD;
 const nodeUrl = process.env.REACT_APP_LNBITS_NODE_URL;
+const adminKey = process.env.REACT_APP_LNBITS_ADMINKEY;
 
 // Store token in localStorage (persists between page reloads)
 let accessToken = localStorage.getItem('accessToken');
@@ -37,6 +38,12 @@ export async function getAccessToken(
   // Store the promise of the request
   accessTokenPromise = (async (): Promise<string> => {
     try {
+      console.log(`Requesting access token from akash `);
+      console.log(`Using username: ${username}`);
+      console.log(`Password : ${password}`);
+    
+      console.log(`Using nodeUrl: ${nodeUrl}`);
+
       const response = await fetch(`${nodeUrl}/api/v1/auth`, {
         method: 'POST',
         headers: {
@@ -258,19 +265,22 @@ const getUsers = async (
   );*/
 
   try {
-    // URL encode the extra filter
-    //const encodedExtra = encodeURIComponent(JSON.stringify(filterByExtra));
-    const encodedExtra = JSON.stringify(filterByExtra);
-    console.log('encodedExtra:', encodedExtra);
-    console.log('encodedExtra:', encodedExtra);
+    // Note: Core Users API does not support filtering by extra metadata
+    // This functionality needs to be implemented at the application layer
+    if (!userName || !password) {
+      throw new Error('Username and password are required');
+    }
+
+    const accessToken = await getAccessToken(userName, password);
+    console.log('Access Token (Bearer):', accessToken);
 
     const response = await fetch(
-      `${nodeUrl}/usermanager/api/v1/users?extra=${encodedExtra}`,
+      `${nodeUrl}/api/v1/wallets`, // Using wallets endpoint as proxy for users
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -334,13 +344,20 @@ const getUser = async (
   }
 
   try {
+    // Use Core Users API to get user wallets
+    if (!userName || !password) {
+      throw new Error('Username and password are required');
+    }
+
+    const accessToken = await getAccessToken(userName, password);
+
     const response = await fetch(
-      `${nodeUrl}/usermanager/api/v1/users/${userId}`,
+      `${nodeUrl}/users/api/v1/user/${userId}/wallet`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': adminKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
@@ -601,13 +618,19 @@ const getInvoicePayment = async (lnKey: string, invoice: string) => {
 
 //Akash Performance Test
 const getAllWallets = async (lnKey: string) => {
- 
+
   try {
-    const response = await fetch(`${nodeUrl}/usermanager/api/v1/wallets/`, {
+    if (!userName || !password) {
+      throw new Error('Username and password are required');
+    }
+
+    const accessToken = await getAccessToken(userName, password);
+
+    const response = await fetch(`${nodeUrl}/api/v1/wallets`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'X-Api-Key': lnKey,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -926,8 +949,9 @@ const getUserWalletTransactions = async (
   );*/
 
   try {
+    // Use core API payments endpoint with wallet parameter
     const response = await fetch(
-      `${nodeUrl}/usermanager/api/v1/transactions/${walletId}`,
+      `${nodeUrl}/api/v1/payments?wallet=${walletId}`,
       {
         method: 'GET',
         headers: {
