@@ -67,7 +67,7 @@ jobs:
               else
                 SLOT_NAME="production"
               fi
-          RESOURCE_GROUP="rg-Zapl-ie-dev"
+          RESOURCE_GROUP="rg-zapl-ie-dev"
           APP_NAME="zapl-ie-dev"
           echo "Using slot: $SLOT_NAME"
     
