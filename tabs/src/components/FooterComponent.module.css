@@ -77,17 +77,6 @@
   transform: scale(1.05);
 }
 
-.separator {
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 14px;
-}
-
-.contactLink {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 10px;
-  transition: all 0.3s ease;
-}
-
 .contactLink:hover {
   color: #F2A900;
 }
