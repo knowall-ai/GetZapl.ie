@@ -233,19 +233,21 @@ const getUserWallets = async (
     // Map the wallets to match the Wallet interface
     let walletData: Wallet[] = data.map((wallet: any) => ({
       id: wallet.id,
-      admin: wallet.admin || '', // TODO: To be implemented. Ref: https://t.me/lnbits/90188
-      name: wallet.name,
-      adminkey: wallet.adminkey,
-      user: wallet.user,
+      admin: wallet.is_admin || '', // TODO: To be implemented. Ref: https://t.me/lnbits/90188
+      name: wallet.username,
+      adminkey: wallet.adminkey || '',
+      user: wallet.email,
       inkey: wallet.inkey,
       balance_msat: wallet.balance_msat, // TODO: To be implemented. Ref: https://t.me/lnbits/90188
-      deleted: wallet.deleted,
+      deleted: wallet.deleted || false,
     }));
 
     // Now remove the deleted wallets.
     const filteredWallets = walletData.filter(
       wallet => wallet.deleted !== true,
     );
+
+    console.log('filteredWallets: ', filteredWallets);
 
     return filteredWallets;
   } catch (error) {
@@ -256,8 +258,8 @@ const getUserWallets = async (
 
 const getUsers = async (
   adminKey: string,
-  filterByExtra: { [key: string]: string } | null, // Pass the extra field as an object
-): Promise<User[] | null> => {
+  filterByExtra?: { [key: string]: string } | null, // Pass the extra field as an object (optional)
+): Promise<User[]> => {
   /*console.log(
     `getUsers starting ... (adminKey: ${adminKey}, filterByExtra: ${JSON.stringify(
       filterByExtra,
@@ -275,7 +277,7 @@ const getUsers = async (
     console.log('Access Token (Bearer):', accessToken);
 
     const response = await fetch(
-      `${nodeUrl}/api/v1/wallets`, // Using wallets endpoint as proxy for users
+      `${nodeUrl}/users/api/v1/user`, // Using wallets endpoint as proxy for users
       {
         method: 'GET',
         headers: {
@@ -293,29 +295,68 @@ const getUsers = async (
 
     const data = await response.json();
 
-    //console.log('getUsers data:', data);
+    console.log('getUsers data:', data);
+
+    // Handle different response formats - API might return array or object
+    let usersArray: any[];
+    if (Array.isArray(data)) {
+      // Data is directly an array
+      usersArray = data;
+    } else if (data && data.data && Array.isArray(data.data)) {
+      // Data has a data property that's an array (common API response format)
+      usersArray = data.data;
+    } else if (data && data.users && Array.isArray(data.users)) {
+      // Data has a users property that's an array
+      usersArray = data.users;
+    } else if (data && typeof data === 'object') {
+      // Data is an object - convert values to array
+      usersArray = Object.values(data);
+    } else {
+      // Fallback to empty array
+      usersArray = [];
+    }
+
+    console.log('getUsers usersArray:', usersArray);
+
+    if (!Array.isArray(usersArray) || usersArray.length === 0) {
+      console.error('Expected users array but got:', usersArray);
+      return [];
+    }
 
     // Map the users to match the User interface
     const usersData: User[] = await Promise.all(
-      data.map(async (user: any) => {
+      usersArray.map(async (user: any) => {
+        console.log('Processing user:', user.name || user.username, 'User object:', user);
         const extra = user.extra || {}; // Provide a default empty object if user.extra is null
+        console.log('User extra field:', extra);
 
         let privateWallet = null;
         let allowanceWallet = null;
 
-        if (user.extra) {
+        // Only fetch wallets if IDs are defined
+        if (user.extra && extra.privateWalletId) {
+          console.log('Fetching private wallet with ID:', extra.privateWalletId);
           privateWallet = await getWalletById(user.id, extra.privateWalletId);
-          allowanceWallet = await getWalletById(
-            user.id,
-            extra.allowanceWalletId,
-          );
+          console.log('Private wallet result:', privateWallet);
+        } else {
+          console.log('No privateWalletId found for user:', user.name || user.username);
+        }
+
+        if (user.extra && extra.allowanceWalletId) {
+          console.log('Fetching allowance wallet with ID:', extra.allowanceWalletId);
+          allowanceWallet = await getWalletById(user.id, extra.allowanceWalletId);
+          console.log('Allowance wallet result:', allowanceWallet);
+        } else {
+          console.log('No allowanceWalletId found for user:', user.name || user.username);
         }
 
         return {
           id: user.id,
-          displayName: user.name,
+          displayName: user.name || user.username || user.email || 'Unknown User',
           aadObjectId: extra.aadObjectId || null,
           email: user.email,
+          profileImg: extra.profileImg || null,
+          type: extra.type || 'Teammate',
           privateWallet: privateWallet,
           allowanceWallet: allowanceWallet,
         };
@@ -396,7 +437,7 @@ const getUser = async (
       allowanceWallet: allowanceWallet || null,
     };
 
-    //console.log('userData:', userData);
+    console.log('userData:', userData);
 
     return userData;
   } catch (error) {

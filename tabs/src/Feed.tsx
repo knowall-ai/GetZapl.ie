@@ -26,8 +26,12 @@ const Home: React.FC = () => {
       setError(null);
 
       try {
+        console.log('1');
         if (!cache['allUsers']) {
           const allUsers = await getUsers(adminKey, {});
+
+          console.log('allUsers', allUsers);
+
           if (allUsers) {
             setCache('allUsers', allUsers);
             setUsers(allUsers);
@@ -109,7 +113,7 @@ const Home: React.FC = () => {
           }}
         >
           <TotalZapsComponent isLoading={loading} allZaps={zaps} allUsers={users} />
-          <ZapActivityChartComponent lnKey={''} isLoading={loading} timestamp={timestamp} allZaps={zaps} allUsers={users} />
+          {/* <ZapActivityChartComponent lnKey={''} isLoading={loading} timestamp={timestamp} allZaps={zaps} allUsers={users} /> */}
         </div>
       </div>
       <div
@@ -120,7 +124,7 @@ const Home: React.FC = () => {
           paddingTop: 0,
         }}
       >
-        <FeedComponent isLoading={loading} allZaps={zaps} allUsers={users} />
+        {/* <FeedComponent isLoading={loading} allZaps={zaps} allUsers={users} /> */}
       </div>
     </div>
   );

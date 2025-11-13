@@ -1,7 +1,6 @@
 import { FunctionComponent, useEffect, useState, useRef, useContext } from 'react';
 import styles from './UserListComponent.module.css';
 import { getUsers } from '../services/lnbitsServiceLocal';
-import { useCache } from '../utils/CacheContext';
 import { RewardNameContext } from './RewardNameContext';
 
 const adminKey = process.env.REACT_APP_LNBITS_ADMINKEY as string;
@@ -11,23 +10,25 @@ const UserListComponent: FunctionComponent = () => {
   const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const fetchCalled = useRef(false); // Ref to track if fetchUsers has been called
-  const { cache, setCache } = useCache();
 
   const fetchUsers = async () => {
-    //Load users from Cache or paraneter
-    console.log('load all ALL users in USERS');
+    console.log('Fetching all users from API');
     setLoading(true);
     setError(null);
 
-    const allUsers = cache['allUsers'] as User[];
-    console.log('load all users in USER comp', allUsers);
-    setUsers(allUsers);
-    setLoading(false);
-    
+    try {
+      const allUsers = await getUsers(adminKey,null);
+      console.log('Loaded users from API:', allUsers);
+      setUsers(allUsers ?? []);
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      setError('Failed to load users');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    
     if (!fetchCalled.current) {
       fetchCalled.current = true;
       fetchUsers();

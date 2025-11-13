@@ -37,28 +37,7 @@ module.exports = function(app) {
     })
   );
 
-  app.use(
-    '/usermanager/api/v1',
-    createProxyMiddleware({
-      target: target,
-      changeOrigin: true,
-      logLevel: 'debug',
-      pathRewrite: { '^/usermanager/api/v1': '/usermanager/api/v1' },
-      onProxyReq: (proxyReq, req, res) => {
-        console.log(`Proxying request to: ${target}${req.url}`);
-        //proxyReq.setHeader('X-Api-Key', apiKey);
-        console.log('Request Headers:', JSON.stringify(proxyReq.getHeaders()));
-      },
-      onProxyRes: (proxyRes, req, res) => {
-        console.log(`Proxy response from: ${target}${req.url}`);
-        console.log('Response status code:', proxyRes.statusCode);
-      },
-      onError: (err, req, res) => {
-        console.error('Proxy error:', err);
-        console.log('Response body:', body);
-      },
-    })
-  );
+  // Note: /api/v1/wallets/api/v1 proxy removed - UserManager API is deprecated, use Core Users API instead
 
   app.use(
     '/lnurlp/api/v1',

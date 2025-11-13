@@ -75,6 +75,7 @@ const TotalZapsComponent: FunctionComponent<TotalZapsComponentProps> = ({ allZap
     }
     
     //Load users from Cache or paraneter
+    debugger; // DEBUGGER WILL PAUSE HERE
     console.log('load all users in Total comp', cache['allUsers'] );
     setUsers(allUsers);
 

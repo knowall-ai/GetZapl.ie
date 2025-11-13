@@ -245,7 +245,7 @@ const getUsers = async (
     const accessToken = await getAccessToken(req, reqUsername, reqPassword);
 
     const response = await fetch(
-      `${lnbiturl}/api/v1/wallets`, // Using wallets endpoint as proxy for users
+      `${lnbiturl}/users/api/v1/user`, // Using wallets endpoint as proxy for users
       {
         method: 'GET',
         headers: {
