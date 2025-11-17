@@ -53,7 +53,7 @@ export function Login() {
               root: { color: 'white', fontSize: '48px', fontWeight: 'bold' },
             }}
           >
-            Zapp.ie
+            Zaplie
           </Text>
           <Stack
             tokens={{ childrenGap: 10 }}
@@ -73,7 +73,7 @@ export function Login() {
               },
             }}
           >
-            Zapp.ie
+            Zaplie
           </Text>
           <Text
             styles={{
