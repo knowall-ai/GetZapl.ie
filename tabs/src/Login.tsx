@@ -10,7 +10,7 @@ import { IRawStyle } from '@fluentui/react';
 import SignInSignOutButton from './components/SignInSignOutButton';
 import { useNavigate } from 'react-router-dom';
 import './styles/Home.css';
-import KnowAllLogo from './images/KnowAllAI_Logo_White.png';
+import KnowAllLogo from './images/KnowAllAI_Logo.png';
 
 const centeredImageStyle: IRawStyle = {
   display: 'block',
@@ -22,7 +22,7 @@ const centeredImageStyle: IRawStyle = {
   flexShrink: 0,
   margin: 'auto',
   paddingBottom: '80px',
-  filter: 'brightness(0) invert(1)',
+  filter: 'brightness(0) invert(1)', // Convert dark logo to white for visibility on dark background
 };
 
 export function Login() {
