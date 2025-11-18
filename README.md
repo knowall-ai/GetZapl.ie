@@ -109,7 +109,6 @@ Have fun, and tag us on Twitter / Nostr!
 This project is developed and maintained by KnowAll AI.
 
 **Contact Information:**
-- Email: hello@knowall.ai
 - Website: https://www.knowall.ai
 
 For support, partnerships, or licensing inquiries, please reach out to us using the contact details above.
