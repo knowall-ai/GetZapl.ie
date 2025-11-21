@@ -33,10 +33,16 @@ const transformZapsToActivities = (
   const dateAmounts: { [date: string]: number } = {};
 
   transactions.forEach(transaction => {
-    if (transaction.time && !isNaN(transaction.time)) {
-      const date = new Date(transaction.time * 1000)
-        .toISOString()
-        .split('T')[0];
+    if (transaction.time) {
+      // Handle both Unix timestamp (number) and ISO date string
+      let date: string;
+      if (typeof transaction.time === 'number') {
+        // Unix timestamp in seconds
+        date = new Date(transaction.time * 1000).toISOString().split('T')[0];
+      } else {
+        // ISO date string
+        date = new Date(transaction.time).toISOString().split('T')[0];
+      }
       const amount = Math.abs(transaction.amount / 1000); // Convert from msats to Sats
       dateAmounts[date] = (dateAmounts[date] || 0) + amount;
     }
@@ -122,7 +128,7 @@ const rewardsName = rewardNameContext.rewardName;
           blockMargin={5}
           fontSize={14}
           theme={{
-            dark: ['#1F1F1F', '#492D16', '#BF6C21', '#E56C31', '#F2A900'],
+            dark: ['#1F1F1F', '#3a5e09', '#4d7a0c', '#6ba513', '#84cc16'],
           }}
           colorScheme="dark"
           labels={{
