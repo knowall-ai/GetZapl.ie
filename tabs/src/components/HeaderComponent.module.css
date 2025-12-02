@@ -114,9 +114,34 @@
   text-align: left;
 }
 
-.dropdownItem:hover {
+.dropdownItem:hover:not(:disabled) {
   background: rgba(132, 204, 22, 0.15);
   color: #84cc16;
+}
+
+.dropdownItem:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.dropdownItem:focus {
+  outline: 2px solid #84cc16;
+  outline-offset: -2px;
+}
+
+/* Focus styles for keyboard navigation */
+.userInfo:focus {
+  outline: 2px solid #84cc16;
+  outline-offset: 2px;
+}
+
+.userInfo:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.userInfo:focus-visible {
+  outline: 2px solid #84cc16;
+  outline-offset: 2px;
 }
 
 .avatar {
@@ -196,5 +221,63 @@
 
   .userEmail {
     max-width: 120px;
+  }
+
+  .detailsSkeleton {
+    display: none;
+  }
+}
+
+/* Loading skeleton styles */
+.userInfoSkeleton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatarSkeleton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.detailsSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nameSkeleton {
+  width: 100px;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.emailSkeleton {
+  width: 140px;
+  height: 11px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  animation-delay: 0.1s;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
