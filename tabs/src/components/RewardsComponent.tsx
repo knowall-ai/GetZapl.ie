@@ -9,7 +9,14 @@ import ProvidedBy from '../images/ProvidedBy.svg';
 import imagePlaceholder from '../images/imagePlaceholderNew.svg';
 import { RewardNameContext } from './RewardNameContext';
 
-const stallID = process.env.REACT_APP_LNBITS_STORE_ID as string;
+const stallID = 'jMbbKAxFBpoKK2BqapULSG';
+
+console.log('=== ENVIRONMENT CHECK ===');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('REACT_APP_LNBITS_NODE_URL:', process.env.REACT_APP_LNBITS_NODE_URL);
+console.log('REACT_APP_LNBITS_STORE_ID:', process.env.REACT_APP_LNBITS_STORE_ID);
+console.log('stallID constant:', stallID);
+console.log('========================');
 
 const RewardsComponent: FunctionComponent<{ adminKey: string; userId: string }> = ({ adminKey, userId }) => {
 

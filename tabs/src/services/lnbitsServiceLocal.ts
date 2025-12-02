@@ -836,9 +836,13 @@ const getNostrRewards = async (
 ): Promise<Reward[]> => {
 
   try {
-    const response = await fetch(
-      `${nodeUrl}/nostrmarket/api/v1/stall/product/${stallId}`,
-      {
+    const url = `${nodeUrl}/nostrmarket/api/v1/stall/product/${stallId}`;
+    console.log('=== getNostrRewards DEBUG ===');
+    console.log('URL:', url);
+    console.log('Admin Key:', adminKey ? `${adminKey.substring(0, 8)}...` : 'missing');
+    console.log('Stall ID:', stallId);
+
+    const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
