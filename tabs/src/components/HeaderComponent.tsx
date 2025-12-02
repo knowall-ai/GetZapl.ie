@@ -27,14 +27,17 @@ const HeaderComponent: React.FC = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
+    let mounted = true;
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (mounted && dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
+      mounted = false;
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
