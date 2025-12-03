@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useAccount, useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { InteractionStatus } from '@azure/msal-browser';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './HeaderComponent.module.css';
 import { useTeamsAuth } from '../hooks/useTeamsAuth';
 
@@ -9,6 +9,7 @@ const HeaderComponent: React.FC = () => {
   const { accounts, inProgress } = useMsal();
   const account = useAccount(accounts[0] || {});
   const isAuthenticated = useIsAuthenticated();
+  const location = useLocation();
   const [userName, setUserName] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
@@ -17,6 +18,9 @@ const HeaderComponent: React.FC = () => {
 
   // Use shared Teams auth hook
   const { handleLogout, isLoggingOut, isTeamsInitializing, isInTeams } = useTeamsAuth();
+
+  // Helper function to check if a path is active
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   useEffect(() => {
     if (account) {
@@ -152,11 +156,11 @@ const HeaderComponent: React.FC = () => {
         </div>
 
         <nav className={styles.navigation}>
-          <Link to="/feed" className={styles.navLink}>Feed</Link>
-          <Link to="/users" className={styles.navLink}>Users</Link>
-          <Link to="/rewards" className={styles.navLink}>Rewards</Link>
-          <Link to="/wallet" className={styles.navLink}>Wallet</Link>
-          <Link to="/settings" className={styles.navLink}>Settings</Link>
+          <Link to="/feed" className={`${styles.navLink} ${isActive('/feed') ? styles.navLinkActive : ''}`}>Feed</Link>
+          <Link to="/users" className={`${styles.navLink} ${isActive('/users') ? styles.navLinkActive : ''}`}>Users</Link>
+          <Link to="/rewards" className={`${styles.navLink} ${isActive('/rewards') ? styles.navLinkActive : ''}`}>Rewards</Link>
+          <Link to="/wallet" className={`${styles.navLink} ${isActive('/wallet') ? styles.navLinkActive : ''}`}>Wallet</Link>
+          <Link to="/settings" className={`${styles.navLink} ${isActive('/settings') ? styles.navLinkActive : ''}`}>Settings</Link>
         </nav>
 
         <div className={styles.rightSection}>

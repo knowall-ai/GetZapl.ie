@@ -62,6 +62,12 @@
   background: rgba(132, 204, 22, 0.1);
 }
 
+.navLinkActive {
+  color: #84cc16;
+  background: rgba(132, 204, 22, 0.15);
+  font-weight: 600;
+}
+
 .navLink:focus {
   outline: 2px solid #84cc16;
   outline-offset: 2px;

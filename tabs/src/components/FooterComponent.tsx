@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './FooterComponent.module.css';
 import { KNOWALL_CONSTANTS } from '../constants/branding';
 import { useTeamsContext } from '../utils/useTeamsContext';
@@ -10,6 +10,10 @@ type FooterComponentProps = {
 
 const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
   const isInTeams = useTeamsContext();
+  const location = useLocation();
+
+  // Helper function to check if a path is active
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   if (hidden) {
     return null;
@@ -20,11 +24,11 @@ const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
       {/* Show navigation links ONLY in Teams context */}
       {isInTeams && (
         <div className={styles.navigation}>
-          <Link to="/feed">Feed</Link>
-          <Link to="/users">Users</Link>
-          <Link to="/rewards">Rewards</Link>
-          <Link to="/wallet">Wallet</Link>
-          <Link to="/settings">Settings</Link>
+          <Link to="/feed" className={isActive('/feed') ? styles.active : ''}>Feed</Link>
+          <Link to="/users" className={isActive('/users') ? styles.active : ''}>Users</Link>
+          <Link to="/rewards" className={isActive('/rewards') ? styles.active : ''}>Rewards</Link>
+          <Link to="/wallet" className={isActive('/wallet') ? styles.active : ''}>Wallet</Link>
+          <Link to="/settings" className={isActive('/settings') ? styles.active : ''}>Settings</Link>
         </div>
       )}
       {/* Always show Powered by KnowAll AI */}
