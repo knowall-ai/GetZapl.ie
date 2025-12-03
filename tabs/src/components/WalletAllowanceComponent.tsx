@@ -98,7 +98,7 @@ const rewardsName = rewardNameContext.rewardName;
           className="row"
           style={{ paddingTop: '20px', paddingBottom: '20px' }}
         >
-          <div className="col-md-6">
+          <div className="col-md-5">
             <div className="amountDisplayContainer">
               <div className="amountDisplay">
                 {balance?.toLocaleString() ?? '0'}
@@ -116,11 +116,12 @@ const rewardsName = rewardNameContext.rewardName;
             </div>
           </div>
 
-          <div className="col-md-6 batteryButtonContainer">
+          <div className="col-md-6" style={{ display: 'flex', alignItems: 'center', gap: '160px' }}>
             <BatteryImageDisplay value={batteryPercentage} />
             <button
               className="sendZapsButton"
               onClick={() => setShowSendZapsPopup(true)}
+              style={{ width: 'auto' }}
             >
               Send some zaps
             </button>
@@ -130,7 +131,7 @@ const rewardsName = rewardNameContext.rewardName;
           className="row"
           style={{ paddingTop: '20px', paddingBottom: '20px' }}
         >
-          <div className="col-md-6">
+          <div className="col-md-5">
             <div className="nextAllwanceContainer">
               <img src={Calendar} alt="" />
               <div className="remaining smallTextFont">Next allowance</div>

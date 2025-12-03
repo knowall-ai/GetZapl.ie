@@ -174,7 +174,8 @@ button{
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
-  width: auto;
+  width: auto !important;
+  flex-shrink: 0;
 }
 
 .sendZapsButton:hover {
@@ -182,8 +183,17 @@ button{
 }
 
 .batteryButtonContainer {
-  display: flex;
+  display: flex !important;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 24px;
+}
+
+.batteryButtonContainer > div {
+  flex-shrink: 0;
+}
+
+.batteryButtonContainer > div > img {
+  max-width: 100px;
+  height: auto;
 }
