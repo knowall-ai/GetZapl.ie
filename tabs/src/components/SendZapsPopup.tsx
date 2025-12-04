@@ -14,6 +14,9 @@ interface SendZapsPopupProps {
   onClose: () => void;
 }
 
+// Extended User type with wallet information for this component
+type UserWithWallet = User & { privateWallet: Wallet | null };
+
 const PRESET_AMOUNTS = [5000, 10000, 25000];
 
 const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
@@ -24,7 +27,7 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
   const [isLoadingUsers, setIsLoadingUsers] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<UserWithWallet[]>([]);
   const [currentUserWallets, setCurrentUserWallets] = useState<{ allowance: Wallet | null; balance: number }>({
     allowance: null,
     balance: 0,
@@ -51,33 +54,24 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
         // Get users from cache or fetch them
         let allUsers = cache['allUsers'] as User[];
         if (!allUsers || allUsers.length === 0) {
-          console.log('Fetching users from API...');
           const fetchedUsers = await getUsers(adminKey, {});
           if (fetchedUsers && fetchedUsers.length > 0) {
             allUsers = fetchedUsers;
             setCache('allUsers', fetchedUsers);
           } else {
-            console.log('No users found');
             setIsLoadingUsers(false);
             return;
           }
         }
 
-        console.log('All users:', allUsers.length);
-
         // Fetch current user's wallet
         const currentUserData = allUsers.find(u => u.aadObjectId === account.localAccountId);
-        console.log('Current user data:', currentUserData);
 
         if (currentUserData) {
           // Always fetch fresh wallet data to get accurate balance
           const wallets = await getUserWallets(adminKey, currentUserData.id);
-          console.log('Current user wallets:', wallets);
           const allowanceWallet = wallets?.find(w => w.name.toLowerCase().includes('allowance'));
-
-          // Fetch latest balance directly from the wallet API
           const currentBalance = allowanceWallet ? allowanceWallet.balance_msat / 1000 : 0;
-          console.log('Current allowance balance:', currentBalance);
 
           setCurrentUserWallets({
             allowance: allowanceWallet || null,
@@ -85,37 +79,17 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
           });
         }
 
-        // Filter out current user and fetch wallets for others
+        // Filter out current user - wallet fetching happens on user selection
         const otherUsers = allUsers.filter(u => u.aadObjectId !== account.localAccountId);
-        console.log('Other users:', otherUsers.length);
 
-        const usersWithWallets = await Promise.all(
-          otherUsers.map(async (user) => {
-            try {
-              const wallets = await getUserWallets(adminKey, user.id);
-              console.log(`User ${user.displayName} wallets:`, wallets?.map(w => w.name));
+        // Initialize users without wallet data - will fetch on selection
+        const usersWithoutWallets: UserWithWallet[] = otherUsers.map(user => ({
+          ...user,
+          privateWallet: null,
+        }));
 
-              // First try to find a "private" wallet, then fall back to any wallet with an inkey
-              let targetWallet = wallets?.find(w => w.name.toLowerCase().includes('private'));
-              if (!targetWallet && wallets && wallets.length > 0) {
-                // Fall back to first available wallet
-                targetWallet = wallets[0];
-              }
-
-              return {
-                ...user,
-                privateWallet: targetWallet || null,
-              };
-            } catch (err) {
-              console.error(`Error fetching wallets for user ${user.displayName}:`, err);
-              return user;
-            }
-          })
-        );
-
-        setUsers(usersWithWallets);
+        setUsers(usersWithoutWallets);
       } catch (err) {
-        console.error('Error loading users:', err);
         setError('Failed to load users');
       } finally {
         setIsLoadingUsers(false);
@@ -125,6 +99,35 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
     loadUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts]); // cache and setCache are from context and are stable, intentionally excluded
+
+  // Fetch wallet for selected user on demand
+  const handleUserSelect = async (userId: string) => {
+    setSelectedUser(userId);
+
+    if (!userId) return;
+
+    const user = users.find(u => u.id === userId);
+    if (!user || user.privateWallet) return; // Already has wallet or not found
+
+    try {
+      const wallets = await getUserWallets(adminKey, userId);
+      // Prioritize "private" wallet, then any non-allowance wallet
+      let targetWallet = wallets?.find(w => w.name.toLowerCase().includes('private'));
+      if (!targetWallet) {
+        targetWallet = wallets?.find(w => !w.name.toLowerCase().includes('allowance'));
+      }
+      if (!targetWallet && wallets && wallets.length > 0) {
+        targetWallet = wallets[0];
+      }
+
+      // Update user with wallet data
+      setUsers(prev => prev.map(u =>
+        u.id === userId ? { ...u, privateWallet: targetWallet || null } : u
+      ));
+    } catch {
+      // Silently fail - error will show when trying to send
+    }
+  };
 
   if (!rewardNameContext) {
     return null;
@@ -272,7 +275,7 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
                 <div className={styles.formGroup}>
                   <select
                     value={selectedUser}
-                    onChange={(e) => setSelectedUser(e.target.value)}
+                    onChange={(e) => handleUserSelect(e.target.value)}
                     className={styles.select}
                     disabled={isLoadingUsers}
                   >
