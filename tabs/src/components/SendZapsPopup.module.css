@@ -514,6 +514,31 @@
     color: #D8D8D8;
 }
 
+/* Transaction ID display */
+.transactionId {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px;
+    background: rgba(132, 204, 22, 0.1);
+    border-radius: 4px;
+    width: 100%;
+}
+
+.transactionLabel {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: #8A8A8A;
+}
+
+.transactionHash {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    color: #84cc16;
+    word-break: break-all;
+}
+
 .closeButton {
     padding: 12px 24px;
     font-family: 'Segoe UI', sans-serif;

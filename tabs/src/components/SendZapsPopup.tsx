@@ -31,6 +31,7 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
   });
   const [sendAnonymously, setSendAnonymously] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string>('');
+  const [paymentHash, setPaymentHash] = useState<string | null>(null);
 
   const { cache, setCache } = useCache();
   const { accounts } = useMsal();
@@ -69,13 +70,18 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
         console.log('Current user data:', currentUserData);
 
         if (currentUserData) {
+          // Always fetch fresh wallet data to get accurate balance
           const wallets = await getUserWallets(adminKey, currentUserData.id);
           console.log('Current user wallets:', wallets);
           const allowanceWallet = wallets?.find(w => w.name.toLowerCase().includes('allowance'));
 
+          // Fetch latest balance directly from the wallet API
+          const currentBalance = allowanceWallet ? allowanceWallet.balance_msat / 1000 : 0;
+          console.log('Current allowance balance:', currentBalance);
+
           setCurrentUserWallets({
             allowance: allowanceWallet || null,
-            balance: allowanceWallet ? allowanceWallet.balance_msat / 1000 : 0,
+            balance: currentBalance,
           });
         }
 
@@ -169,8 +175,11 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
     setError(null);
 
     try {
-      // Build the memo with anonymous prefix if needed
+      // Build the memo with value and anonymous prefix if needed
       let paymentMemo = memo || 'Zap payment';
+      if (selectedValue) {
+        paymentMemo = `[${selectedValue.charAt(0).toUpperCase() + selectedValue.slice(1)}] ${paymentMemo}`;
+      }
       if (sendAnonymously) {
         paymentMemo = `[Anonymous] ${paymentMemo}`;
       }
@@ -194,8 +203,10 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
       );
 
       if (result && result.payment_hash) {
+        setPaymentHash(result.payment_hash);
         setSuccess(true);
-        // Update balance
+        // Optimistic update for immediate UI feedback
+        // Fresh balance will be fetched from API when popup reopens
         const updatedBalance = currentUserWallets.balance - zapAmount;
         setCurrentUserWallets(prev => ({ ...prev, balance: updatedBalance }));
       } else {
@@ -416,6 +427,12 @@ const SendZapsPopup: React.FC<SendZapsPopupProps> = ({ onClose }) => {
               />
               <div className={styles.popupText}>Zap sent successfully!</div>
             </div>
+            {paymentHash && (
+              <div className={styles.transactionId}>
+                <span className={styles.transactionLabel}>Transaction ID:</span>
+                <span className={styles.transactionHash}>{paymentHash.substring(0, 16)}...</span>
+              </div>
+            )}
             <button className={styles.closeButton} onClick={handleClose}>
               Close
             </button>
