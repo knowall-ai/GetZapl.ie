@@ -2,14 +2,14 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './FooterComponent.module.css';
 import { KNOWALL_CONSTANTS } from '../constants/branding';
-import { useTeamsContext } from '../utils/useTeamsContext';
+import { useTeamsAuth } from '../hooks/useTeamsAuth';
 
 type FooterComponentProps = {
   hidden: boolean;
 };
 
 const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
-  const isInTeams = useTeamsContext();
+  const { isInTeams } = useTeamsAuth();
   const location = useLocation();
 
   // Helper function to check if a path is active
