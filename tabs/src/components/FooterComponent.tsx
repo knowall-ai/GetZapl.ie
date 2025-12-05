@@ -24,13 +24,13 @@ const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
     <footer className={styles.footer}>
       {/* Show navigation links ONLY in Teams context */}
       {isInTeams && (
-        <div className={styles.navigation}>
-          <Link to="/feed" className={isActive('/feed') ? styles.active : ''}>Feed</Link>
-          <Link to="/users" className={isActive('/users') ? styles.active : ''}>Users</Link>
-          <Link to="/rewards" className={isActive('/rewards') ? styles.active : ''}>Rewards</Link>
-          <Link to="/wallet" className={isActive('/wallet') ? styles.active : ''}>Wallet</Link>
-          <Link to="/settings" className={isActive('/settings') ? styles.active : ''}>Settings</Link>
-        </div>
+        <nav className={styles.navigation} aria-label="Primary navigation">
+          <Link to="/feed" className={isActive('/feed') ? styles.active : ''} aria-current={isActive('/feed') ? 'page' : undefined}>Feed</Link>
+          <Link to="/users" className={isActive('/users') ? styles.active : ''} aria-current={isActive('/users') ? 'page' : undefined}>Users</Link>
+          <Link to="/rewards" className={isActive('/rewards') ? styles.active : ''} aria-current={isActive('/rewards') ? 'page' : undefined}>Rewards</Link>
+          <Link to="/wallet" className={isActive('/wallet') ? styles.active : ''} aria-current={isActive('/wallet') ? 'page' : undefined}>Wallet</Link>
+          <Link to="/settings" className={isActive('/settings') ? styles.active : ''} aria-current={isActive('/settings') ? 'page' : undefined}>Settings</Link>
+        </nav>
       )}
       {/* Always show Powered by KnowAll AI */}
       <div className={styles.attribution}>

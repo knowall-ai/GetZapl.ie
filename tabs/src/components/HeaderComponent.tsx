@@ -118,6 +118,13 @@ const HeaderComponent: React.FC = () => {
               <span className={styles.appName}>Zaplie</span>
             </Link>
           </div>
+          <nav className={styles.navigation} aria-hidden="true">
+            <div className={styles.navLinkSkeleton} />
+            <div className={styles.navLinkSkeleton} />
+            <div className={styles.navLinkSkeleton} />
+            <div className={styles.navLinkSkeleton} />
+            <div className={styles.navLinkSkeleton} />
+          </nav>
           <div className={styles.rightSection}>
             <div className={styles.userInfoSkeleton}>
               <div className={styles.avatarSkeleton} />
@@ -156,12 +163,12 @@ const HeaderComponent: React.FC = () => {
           </Link>
         </div>
 
-        <nav className={styles.navigation}>
-          <Link to="/feed" className={`${styles.navLink} ${isActive('/feed') ? styles.navLinkActive : ''}`}>Feed</Link>
-          <Link to="/users" className={`${styles.navLink} ${isActive('/users') ? styles.navLinkActive : ''}`}>Users</Link>
-          <Link to="/rewards" className={`${styles.navLink} ${isActive('/rewards') ? styles.navLinkActive : ''}`}>Rewards</Link>
-          <Link to="/wallet" className={`${styles.navLink} ${isActive('/wallet') ? styles.navLinkActive : ''}`}>Wallet</Link>
-          <Link to="/settings" className={`${styles.navLink} ${isActive('/settings') ? styles.navLinkActive : ''}`}>Settings</Link>
+        <nav className={styles.navigation} aria-label="Primary navigation">
+          <Link to="/feed" className={`${styles.navLink} ${isActive('/feed') ? styles.navLinkActive : ''}`} aria-current={isActive('/feed') ? 'page' : undefined}>Feed</Link>
+          <Link to="/users" className={`${styles.navLink} ${isActive('/users') ? styles.navLinkActive : ''}`} aria-current={isActive('/users') ? 'page' : undefined}>Users</Link>
+          <Link to="/rewards" className={`${styles.navLink} ${isActive('/rewards') ? styles.navLinkActive : ''}`} aria-current={isActive('/rewards') ? 'page' : undefined}>Rewards</Link>
+          <Link to="/wallet" className={`${styles.navLink} ${isActive('/wallet') ? styles.navLinkActive : ''}`} aria-current={isActive('/wallet') ? 'page' : undefined}>Wallet</Link>
+          <Link to="/settings" className={`${styles.navLink} ${isActive('/settings') ? styles.navLinkActive : ''}`} aria-current={isActive('/settings') ? 'page' : undefined}>Settings</Link>
         </nav>
 
         <div className={styles.rightSection}>
