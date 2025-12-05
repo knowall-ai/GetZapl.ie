@@ -41,6 +41,9 @@
   transform: scale(1.05);
 }
 
+/* ========================================
+   Navigation Styles
+   ======================================== */
 .navigation {
   display: flex;
   align-items: center;

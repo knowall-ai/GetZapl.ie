@@ -4,6 +4,7 @@ import { InteractionStatus } from '@azure/msal-browser';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './HeaderComponent.module.css';
 import { useTeamsAuth } from '../hooks/useTeamsAuth';
+import { isActivePath } from '../utils/navigation';
 
 const HeaderComponent: React.FC = () => {
   const { accounts, inProgress } = useMsal();
@@ -19,8 +20,8 @@ const HeaderComponent: React.FC = () => {
   // Use shared Teams auth hook
   const { handleLogout, isLoggingOut, isTeamsInitializing, isInTeams } = useTeamsAuth();
 
-  // Helper function to check if a path is active
-  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
+  // Use shared navigation utility for active path checking
+  const isActive = (path: string) => isActivePath(location.pathname, path);
 
   useEffect(() => {
     if (account) {

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './FooterComponent.module.css';
 import { KNOWALL_CONSTANTS } from '../constants/branding';
 import { useTeamsAuth } from '../hooks/useTeamsAuth';
+import { isActivePath } from '../utils/navigation';
 
 type FooterComponentProps = {
   hidden: boolean;
@@ -12,8 +13,8 @@ const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
   const { isInTeams } = useTeamsAuth();
   const location = useLocation();
 
-  // Helper function to check if a path is active
-  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
+  // Use shared navigation utility for active path checking
+  const isActive = (path: string) => isActivePath(location.pathname, path);
 
   if (hidden) {
     return null;
@@ -34,7 +35,7 @@ const FooterComponent: React.FC<FooterComponentProps> = ({ hidden }) => {
       {/* Always show Powered by KnowAll AI */}
       <div className={styles.attribution}>
         <span className={styles.poweredBy}>Powered by</span>
-         <a
+        <a
           href={KNOWALL_CONSTANTS.website}
           target="_blank"
           rel="noopener noreferrer"
